@@ -88,6 +88,17 @@ export class UsuariosService {
     };
   }
 
+
+  async getUsers(){
+    const users = await this.firebaseService.firestore
+      .collection('usuarios')
+      .get();
+       return users.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));
+  }
+
   private getFirebaseErrorCode(error: unknown): string | undefined {
     if (typeof error === 'object' && error !== null && 'code' in error) {
       const { code } = error as { code?: unknown };
