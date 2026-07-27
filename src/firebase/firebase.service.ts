@@ -23,6 +23,7 @@ export class FirebaseService {
         });
 
     this.firestore = getFirestore(app);
+    this.firestore.settings({ ignoreUndefinedProperties: true });
     this.auth = getAuth(app);
   }
 }
